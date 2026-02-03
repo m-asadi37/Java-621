@@ -82,21 +82,22 @@ public class Main {
     }
 
     public static void main(String[] args) {
-// Instantiate
+        // Instantiate
         PersianDate today = PersianDate.now();
         PersianDate persianDate1 = PersianDate.of(1396, 7, 15);
         PersianDate persianDate2 = PersianDate.of(1396, PersianMonth.MEHR, 15);
+        System.out.println(today);
 
-// Convert
+        // Convert
         PersianDate persianDate5 = PersianDate.of(1397, 5, 11);
         LocalDate gregDate = today.toGregorian();    // => '2018-08-02'
         PersianDate persianDate6 = PersianDate.fromGregorian(gregDate);  //  => '1397/05/11'
 
-// Parse
+        // Parse
         PersianDate persianDate3 = PersianDate.parse("1400-06-15");    // From the standard format
         PersianDate persianDate4 = PersianDate.parse("1400/06/15", DateTimeFormatter.ofPattern("yyyy/MM/dd"));    // From a desired format
 
-// Format
+        // Format
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         dtf.format(PersianDate.now());    // => e.g. '1396/05/10'
     }
