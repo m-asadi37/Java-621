@@ -18,36 +18,80 @@ public class Application {
         while (!isExit) {
 
             int menu = printMenu();
-
-            boolean isBack = false;
-            do {
-                switch (menu) {
-                    case 1 -> {
+            switch (menu) {
+                case 1 -> {
+                    boolean isBack = false;
+                    while (!isBack) {
                         int submenu = printStudentMenu();
                         switch (submenu) {
                             case 1 -> addStudent();
                             case 2 -> removeStudent();
+                            case 3 -> updateStudent();
+                            case 4 -> infoStudent();
+                            case 5 -> showStudentsList();
                             case 0 -> isBack = true;
                         }
                     }
-                    case 0 -> isExit = true;
                 }
-            } while (!isBack);
+                case 0 -> isExit = true;
+            }
+
         }
+    }
+
+    private static void showStudentsList() {
+        for (Student find : students) {
+            if (find != null) {
+                find.showInfo();
+            }
+        }
+    }
+
+    private static void infoStudent() {
+        System.out.print("code: ");
+        String code = scanner.next();
+
+        for (Student find : students) {
+            if (find != null && find.getCode().equals(code)) {
+                find.showInfo();
+                return;
+            }
+        }
+        System.out.println(">> student not found!");
+    }
+
+    private static void updateStudent() {
+        System.out.print("code for update: ");
+        String code = scanner.next();
+
+        System.out.print("new grade: ");
+        double grade = scanner.nextDouble();
+
+        for (Student find : students) {
+            if (find != null && find.getCode().equals(code)) {
+                find.setScore(grade);
+                System.out.println(">> student updated!");
+                return;
+            }
+        }
+        System.out.println(">> student not found!");
     }
 
     private static void removeStudent() {
         System.out.print("code: ");
         String code = scanner.next();
 
+        boolean flag = false;
         for (int i = 0; i < students.length; i++) {
             if (students[i] != null && students[i].getCode().equals(code)) {
                 students[i] = null;
+                flag = true;
                 System.out.println(">> student removed successfully!");
                 break;
             }
         }
-        //TODO: not found message
+        if (!flag)
+            System.out.println(">> student not found!");
     }
 
     private static void addStudent() {

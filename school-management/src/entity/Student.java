@@ -1,6 +1,7 @@
 package entity;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Student {
 
@@ -56,5 +57,10 @@ public class Student {
 
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
+    }
+
+    public void showInfo() {
+        System.out.printf("[code: '%s', name:'%s', family:'%s', birthdate:'%s', score:'%04.2f']\n",
+                code, name, family, birthday.format(DateTimeFormatter.ISO_DATE), score);
     }
 }
